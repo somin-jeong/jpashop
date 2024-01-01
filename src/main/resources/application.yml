@@ -1,17 +1,23 @@
-spring: #???? ??
-  datasource: #???? 2?
-    url: jdbc:h2:tcp://localhost/~/jpashop #4?
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
-  jpa: #???? 2?
-    hibernate: #???? 4?
-      ddl-auto: create #???? 6?
-    properties: #???? 4?
-      hibernate: #???? 6?
-        show_sql: true #???? 8?
-        format_sql: true #???? 8?
+spring:
+  datasource:
+    url: ${DATASOURCE_URL_PROD}
+    username: ${DATASOURCE_USERNAME}
+    password: ${DATASOURCE_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    dbcp2:
+      validation-query: select 1
+  sql:
+    init:
+      platform: mysql
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+#        show_sql: true
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
 
-logging.level: #???? ??
-  org.hibernate.SQL: debug #???? 2?
-  org.hibernate.orm.jdbc.bind: trace #??? ?? 3.x, hibernate6
+logging.level:
+  org.hibernate.SQL: debug
+  org.hibernate.orm.jdbc.bind: trace
